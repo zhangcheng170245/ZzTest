@@ -3,6 +3,7 @@ package com.zztest.controller;
 import com.zztest.dto.UserDto;
 import com.zztest.service.TestUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -19,12 +20,15 @@ public class TestUserController {
     @Autowired
     private TestUserService testUserService;
 
+    @Value("${zc.key}")  //读取配置文件
+    private String zckey;
+
    // @RequestMapping(value = "login",method = RequestMethod.POST)
     @PostMapping(value = "login")  // 只能用于方法级别
     //将request body中的json/xm1对象解析成该参数类型的Javabean对象
     public  String login(@RequestBody UserDto userDto){
         String login = testUserService.login(userDto);
-        return "成功"+ login;
+        return "成功"+ login+zckey;
     }
 
     @RequestMapping(value = "byId/{userId}",method = RequestMethod.GET)
