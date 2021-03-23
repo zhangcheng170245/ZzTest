@@ -2,6 +2,8 @@ package com.zztest.controller;
 
 import com.zztest.dto.UserDto;
 import com.zztest.service.TestUserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
  * @Version: 1.0
  */
 
+
+@Api(tags = "橙子的测试平台-controller首页")
 @RestController  //转换响应写入http响应
 @RequestMapping("/user") // 将客户端请求路劲与后端方法绑定
 public class TestUserController {
@@ -23,6 +27,7 @@ public class TestUserController {
     @Value("${zc.key}")  //读取配置文件
     private String zckey;
 
+    @ApiOperation("登录接口")
    // @RequestMapping(value = "login",method = RequestMethod.POST)
     @PostMapping(value = "login")  // 只能用于方法级别
     //将request body中的json/xm1对象解析成该参数类型的Javabean对象

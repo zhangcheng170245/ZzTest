@@ -1,5 +1,7 @@
 package com.zztest.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -8,8 +10,11 @@ import lombok.Data;
  * @Date: 2021/3/23/023 15:46
  * @Version: 1.0
  */
+@ApiModel("用户登录对象")
 @Data
 public class UserDto {
+    @ApiModelProperty(value = "用户名",required = true)
     private String name;
-    private String  pwd;
+    @ApiModelProperty(value = "密码",required = true)
+    private String pwd;
 }
