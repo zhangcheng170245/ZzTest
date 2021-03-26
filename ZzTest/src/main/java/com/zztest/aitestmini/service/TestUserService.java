@@ -1,6 +1,6 @@
-package com.zztest.service;
+package com.zztest.aitestmini.service;
 
-import com.zztest.dto.UserDto;
+import com.zztest.aitestmini.dto.UserDto;
 
 /**
  * @Author: zhangcheng

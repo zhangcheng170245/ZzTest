@@ -1,5 +1,6 @@
-package com.zztest.common;
+package com.zztest.aitestmini.common;
 
+import com.zztest.aitestmini.dto.ResultDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,18 +18,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice //处理异常类
 public class GlobalExceptionHandler {
     @ExceptionHandler({ServiceException.class})
-    public String serviceExceptionHandler(){
-        return  "业务异常";
+    public ResultDto serviceExceptionHandler(){
+        return  ResultDto.fail("业务异常");
     }
 
     @ExceptionHandler({Exception.class})
-    public String exceptionHandler(){
-        return  "非业务异常";
+    public ResultDto exceptionHandler(){
+        return  ResultDto.fail("非业务异常");
     }
 
     @ExceptionHandler({Throwable.class})
-    public String throwableHandler(){
-        return "系统错误";
+    public ResultDto throwableHandler(){
+        return  ResultDto.fail("系统错误");
     }
 
 }

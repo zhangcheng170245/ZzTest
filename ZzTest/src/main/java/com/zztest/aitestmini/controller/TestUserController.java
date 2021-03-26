@@ -1,9 +1,12 @@
-package com.zztest.controller;
+package com.zztest.aitestmini.controller;
 
-import com.zztest.dto.UserDto;
-import com.zztest.service.TestUserService;
+import com.zztest.aitestmini.common.ServiceException;
+import com.zztest.aitestmini.dto.ResultDto;
+import com.zztest.aitestmini.dto.UserDto;
+import com.zztest.aitestmini.service.TestUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * @Version: 1.0
  */
 
-
+@Slf4j
 @Api(tags = "橙子的测试平台-controller首页")
 @RestController  //转换响应写入http响应
 @RequestMapping("/user") // 将客户端请求路劲与后端方法绑定
@@ -31,9 +34,19 @@ public class TestUserController {
    // @RequestMapping(value = "login",method = RequestMethod.POST)
     @PostMapping(value = "login")  // 只能用于方法级别
     //将request body中的json/xm1对象解析成该参数类型的Javabean对象
-    public  String login(@RequestBody UserDto userDto){
-        String login = testUserService.login(userDto);
-        return "成功"+ login+zckey;
+    //   public  String login(@RequestBody UserDto userDto){
+    public ResultDto<UserDto> login(@RequestBody UserDto userDto){
+        String result = testUserService.login(userDto);
+             //全局异常处理
+            if (userDto.getName().contains("error")){  //模拟异常类
+                ServiceException.throwEx("用户名包含敏感信息");
+            }
+            if (userDto.getName().contains("error2")){
+                throw new NullPointerException();
+            }
+
+       // return "成功"+ login+zckey;
+        return ResultDto.success("成功"+result+zckey);
     }
 
     @RequestMapping(value = "byId/{userId}",method = RequestMethod.GET)

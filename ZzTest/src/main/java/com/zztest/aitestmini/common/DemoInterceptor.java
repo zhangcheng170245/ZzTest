@@ -1,4 +1,4 @@
-package com.zztest.common;
+package com.zztest.aitestmini.common;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;

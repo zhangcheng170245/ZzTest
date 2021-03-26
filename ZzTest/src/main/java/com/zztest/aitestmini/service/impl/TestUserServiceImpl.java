@@ -1,8 +1,8 @@
-package com.zztest.service.impl;
+package com.zztest.aitestmini.service.impl;
 
-import com.zztest.dto.UserDto;
-import com.zztest.service.TestUserService;
-import org.springframework.stereotype.Component;
+import com.zztest.aitestmini.dto.UserDto;
+import com.zztest.aitestmini.service.TestUserService;
+import org.springframework.stereotype.Service;
 
 /**
  * @Author: zhangcheng
@@ -11,9 +11,8 @@ import org.springframework.stereotype.Component;
  * @Version: 1.0
  */
 
-@Component
+@Service
 public class TestUserServiceImpl implements TestUserService {
-
 
     @Override
     public String login(UserDto userDto) {
