@@ -1,12 +1,16 @@
 package com.zztest.aitestmini.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zztest.aitestmini.common.ServiceException;
 import com.zztest.aitestmini.dto.ResultDto;
-import com.zztest.aitestmini.dto.UserDto;
+import com.zztest.aitestmini.dto.user.AddUserDto;
+import com.zztest.aitestmini.dto.user.UserDto;
+import com.zztest.aitestmini.entity.ZzTestUser;
 import com.zztest.aitestmini.service.TestUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -62,6 +66,20 @@ public class TestUserController {
         return "成功"+userId;
     }
 
+    //用户注册
+    @ApiOperation(value = "用户注册")
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    public  String save(@RequestBody AddUserDto addUserDto){
+        ZzTestUser zztestUser = new ZzTestUser();
+        //使用spring 工具直接赋值
+        BeanUtils.copyProperties(addUserDto,zztestUser);
+        // 单独赋值
+ //       zztestUser.setEmail(addUserDto.getEmail());
+        //实体类转换为json
+        System.out.println(JSONObject.toJSONString(zztestUser));
+
+        return "成功";
+    }
 
 }
 
