@@ -1,6 +1,8 @@
 package com.zztest.aitestmini.service;
 
-import com.zztest.aitestmini.dto.UserDto;
+import com.zztest.aitestmini.dto.ResultDto;
+import com.zztest.aitestmini.dto.user.UserDto;
+import com.zztest.aitestmini.entity.ZzTestUser;
 
 /**
  * @Author: zhangcheng
@@ -9,7 +11,8 @@ import com.zztest.aitestmini.dto.UserDto;
  * @Version: 1.0
  */
 public interface TestUserService {
-    //接口
+    //登录接口
     public String login(UserDto userDto);
-
+    // 注册
+    public ResultDto<ZzTestUser> save(ZzTestUser zzTestUser);
 }
