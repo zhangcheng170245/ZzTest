@@ -8,6 +8,7 @@ import com.zztest.aitestmini.service.TestUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,10 +37,17 @@ public class ZzTestController {
         ZzTestUser zztestUser = new ZzTestUser();
         //使用spring 工具直接赋值
         BeanUtils.copyProperties(addUserDto,zztestUser);
-        // 单独赋值
-        //       zztestUser.setEmail(addUserDto.getEmail());
+        // 单独赋值 zztestUser.setEmail(addUserDto.getEmail());
+        if(StringUtils.isEmpty(addUserDto.getPassword())){
+            return ResultDto.fail("密码不能为空");
+        }
+        if (StringUtils.isEmpty(addUserDto.getUserName())){
+            return ResultDto.fail("用户名不能为空");
+
+        }
+
         //实体类转换为json
-      log.info("请求入参"+JSONObject.toJSONString(zztestUser));
+        log.info("请求入参"+JSONObject.toJSONString(zztestUser));
         testUserService.save(zztestUser);
         return ResultDto.success("成功",zztestUser);
     }
